@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chatter App</title>
+ 
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="html5shim.js"></script>
+    <![endif]-->
+
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  <%= yield :head %> <!-- controller specific js and css -->
+ 
+</head>
+<body>
+
+
+<%= render :partial => 'shared/navbar' %>
+
+
+<div class="container" id="top-level-container" >
+	
+   	 <%= yield %>
+
+	<div id="footer">
+		<footer>
+		  &#169; <a href="http://salesforce.com">Salesforce.com</a>
+		</footer>
+	</div>
+
+</div>
+
+
+
+	
+
+
+</body>
+</html>

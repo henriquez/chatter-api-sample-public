@@ -1,0 +1,159 @@
+/* 
+ * Place all application-wide styles here 
+ */
+
+body {
+        padding-top: 50px;
+        padding-bottom: 40px;
+      }
+
+/* unauthenticated user's home page styles */
+#home-index-hero { margin: 80px; }
+#home-index-hero-second-title { margin-bottom: 30px; }
+#home-index-hero-top-title { 
+ 					   margin-bottom: 30px;
+					 }
+span.home-page-font { font-size: 16px  }
+
+textarea.autoexpand { max-height:800px; overflow-x: hidden; overflow-y: hidden; }
+img.chatter-api-submit-spinner { display:none; } 
+div#feed-post-div { width: 350px; }
+div.fixed-width-370 { width: 370px; } /* need to fix it otherwise will collapse weirdly */
+div#feed-display-well { padding: 10px; }
+div.chatter-feed-item-wrapper {  
+  margin-top: 4px; margin-bottom: 8px; 
+  border-bottom: 1px solid #D6D6D6;
+  min-height: 40px;
+  padding: 0 2px 4px 0;
+}
+div.chatter-feed-item-body {   
+  /* margin-left: 40px; lets user profile pic float into the margin */
+}
+
+div.chatter-feed-item-indented-body { 
+  width: 310px;
+  position: relative; 
+  line-height: 15px;
+  padding-bottom: 4px;
+  margin-left: 40px;
+}  
+img.chatter-user-profile-picture { 
+  float: left;
+  padding: 2px 2px 0 0;
+} /* lets user profile pic float into the margin created by feed-item-body */
+button#next-feed-page { width: 200px; margin-left: 20px; margin-top: 20px; }
+a.chatter-user-profile-picture { display: inline; position: static; }
+a.chatter-feed-component-date { color: grey }
+div.chatter-feed-item-extras { 
+  clear: both;
+}
+div.chatter-feed-item-actions { 
+  margin: 0;
+  padding: 2px 0 4px 0;
+}
+div.chatter-likes-container {
+  border-top: 1px solid #E6E6E6;
+  padding: 2px 0 2px 0;
+  
+}
+div.chatter-comment-container {
+  border-top: 1px solid #E6E6E6;
+  min-height: 44px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  /* visibility: hidden;
+  display: none; */
+}
+
+
+div.chatter-comment-indented-body {  
+  line-height: 15px;
+  position: relative;
+  padding-right: 10px; 
+  margin-left: 40px; /* lets user profile pic float into the margin */
+} 
+
+a.chatter-show-file-post-fields img {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  top: -2px;
+  background-image: url(<%= asset_path 'chatter-publisher-sprites.png' %>);
+} 
+
+div.chatter-link-post { margin: 4px 0 4px 0px;}
+span.chatter-link-text { color: grey }
+a.chatter-link-post-url img {  
+  height: 16px;
+  width: 16px;
+  position: relative;
+  top: -2px;
+  background-position: -32px 0;
+  background-image: url(<%= asset_path 'chatter-publisher-sprites.png' %>);
+}
+
+div.chatter-comment-container { clear: both; }
+
+div.chatter-comment-extras { clear: both; }
+div.chatter-comment-file-post-fields { display: none; }
+a.chatter-close-file-post-fields { display: none; }
+div.chatter-wrapped-body, div.chatter-wrapped-description { 
+  float: left; 
+  word-wrap: break-word; 
+ 
+}
+/* for wrapping to work, the block elements must have a fixed width */
+div.comment { width: 260px; }
+div.feeditem { width: 310px; }
+div.chatter-wrapped-description { margin-top: 4px; }
+div.alert { display: none; }
+.icon-remove { opacity:0.35; filter:alpha(opacity=35); }
+.chatter-feedcomponent-hover-controls { float:right;  display: none; }
+.break-link { 
+  	-ms-word-break: break-all;
+     word-break: break-all;
+     // Non standard for webkit
+     word-break: break-word;
+     -webkit-hyphens: auto;
+     -moz-hyphens: auto;
+     hyphens: auto;
+}
+/* feed item auxilary body for attachments */
+div.chatter-feed-item-aux-body, div.chatter-comment-aux-body {  }
+div.chatter-feed-item-actions { width: 300px; clear: left; }
+div.chatter-comment-actions { width: 260px; clear: left; }
+div.chatter-aux-body-inner { margin: 4px 0 4px 0; float: left; }
+div.chatter-content-post-title-description {
+  margin-left: 50px;
+  
+}
+div.clear { clear:both;}
+img.chatter-content-post-rendition { float: left; }
+
+/*         Feed Publisher        */
+div.chatter-comment-share-button {
+  margin-left: 100px; 
+  float: right;
+}
+
+
+/*         comment Publisher      */
+div.chatter-comment-publisher {
+  margin-bottom: 36px;
+}
+
+div.chatter-open-close-controls {
+  float: left;
+}
+
+textarea.comment {
+  width: 250px;
+  height: 15px;
+  line-height: 15px;
+  margin-top: 2px;
+}
+button.share-button {
+  
+}
+
+.chatter-hide { display: none; }

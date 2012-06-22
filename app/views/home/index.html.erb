@@ -1,0 +1,45 @@
+
+
+<div class="row-fluid" id="center-row">
+    <div class="span12">
+		<div id="notices"> <% if flash[:error] %>
+							     <div class="alert alert-error" style="display: block;">
+							 				<a class="close" data-dismiss="alert" href="#">×</a>
+							 				<strong>Error!</strong> <%= flash[:error] %>
+							     </div>
+							 <% end %>
+							 <% if flash[:notice] %>
+							     <div class="alert" style="display: block;">
+							 				<a class="close" data-dismiss="alert" href="#">×</a>
+							 				<strong>Warning!</strong> <%= flash[:notice] %>
+							     </div>
+							 <% end %>
+        </div>
+
+		
+		<div id="home-index-hero" class="hero-unit">
+			<h1 id="home-index-hero-top-title" >Chatter API Sample Application</h1>
+			
+			<div class="row">
+				<div class="span2">
+				    <h2 id="home-index-hero-second-title">To Start</h2>				   
+				</div>
+				<div class="span-4">
+					<%= form_tag('/auth/salesforce', :id => "login") do %>
+					      <button name="oauth" type="submit" id="oauth-button" class="btn btn-info btn-large"  ><strong><span id="login-button-text">Login with Salesforce</span></strong></button>
+					<% end %>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="span-4">
+			       <span class="home-page-font">See the code <a href="http://github.com/henriquez/chatter-api-sample-public">on github</a></span>
+		        </div>
+			</div>	
+		</div>
+		
+
+		
+		
+	</div>
+	
+</div>

@@ -1,0 +1,57 @@
+
+
+<div class="row" id="notices">
+	<div class="span5">
+		<div id="notices"> <% if flash[:error] %>
+							     <div class="alert alert-error" style="display: block;">
+							 				<a class="close" data-dismiss="alert" href="#">×</a>
+							 				<strong>Error!</strong> <%= flash[:error] %>
+							     </div>
+							 <% end %>
+							 <% if flash[:notice] %>
+							     <div class="alert" style="display: block;">
+							 				<a class="close" data-dismiss="alert" href="#">×</a>
+							 				<strong>Warning!</strong> <%= flash[:notice] %>
+							     </div>
+							 <% end %>
+        </div>
+	</div> 
+	
+</div>
+
+<div class="row" id="center-row">
+    
+	<div class="span8" id="app-left-col" >
+		<div class="well">
+		   <p>
+  	  		[ your application's main content goes here ]
+          </p> 
+		</div>
+  	</div>
+
+	<div class="span4 chatter-outer-foundation" id="app-right-col">
+		
+		<div class="row fixed-width-370">	
+			<div class="span4 fixed-width-370" id="feed-post">
+				<%= render :partial => 'chatter/feeds/chatter_publisher' %>
+			</div>
+	 	</div>
+	
+		<div class="row fixed-width-370">
+			<div class="span4 fixed-width-370" >
+				<div id="feed-display-well" class="well fixed-width-370">
+				  <%= render :partial => 'chatter/feeds/chatter_feed' %>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+		
+					
+						
+</div>
+	
+
+
+
+

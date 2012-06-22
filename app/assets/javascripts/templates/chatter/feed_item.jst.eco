@@ -1,0 +1,64 @@
+<div class="chatter-feed-item-wrapper"  object-id="<%= @item.id %>" id="chatter-feed-item-wrapper-<%= @item.id %>"  >
+	
+
+
+	    <span><a class="chatter-user-profile-picture" href="<%= @item.instanceUrl %>/<%= @item.actor.id %>"><img class="chatter-user-profile-picture" src="<%= Chatter.Util.authenticatedImageUrl(@item.photoUrl) %>" width="32" height="32" ></a>
+		</span>
+
+	
+	<div class="chatter-feed-item-body">
+		<div class="chatter-feed-item-indented-body"  object-id="<%= @item.id %>" id="chatter-feed-item-indented-body-<%= @item.id %>" >
+			
+			<div class="chatter-wrapped-body feeditem" object-id="<%= @item.id %>" >
+				<%- @item.renderTitle() %>
+				&nbsp;
+				<%- @item.segmentsToHtml() %>				
+		    
+			    <div class="chatter-feed-item-aux-body">
+				<%- @item.attachment?.render(@item.instanceUrl) %>			
+			    </div>	
+		
+				<div class="chatter-feed-item-actions">
+					<!-- TODO: make this a drop down called Actions when you need to add the Share functionality.  Drop down for space reasons otherwise won't fit on one line -->
+					<a class="chatter-feed-component-date" href="<%= @item.instanceUrl %>/<%= @item.id %>"><%- @item.displayDate %></a>&nbsp;
+				
+					<% if @item.comments.total is 0: %>
+						<a href="javascript: void(0);" class="chatter-feed-item-comment-toggle" object-id="<%= @item.id %>" >Comment</a>
+					<% end %>
+				
+					<%- @item.renderLikeOrUnlikeLink('feeditem') %>
+				
+					  <span class="chatter-feedcomponent-hover-controls">
+						<i class="icon-remove chatter-feeditem-delete" object-id="<%= @item.id %>" ></i>
+					  </span>
+				</div>
+			</div><!--chatter-wrapped-body-->
+			    
+	
+	
+			<div class="chatter-feed-item-extras">
+				<div id="chatter-users-that-liked-foundation-<%= @item.id %>"><!--no styling on foundation div since always needs to be there even if no likes -->
+				  <%- Chatter.Like.renderLikesContainer(@item.id, @item.likes, @item.likesTotal, @item.isLikedByCurrentUser, @item.instanceUrl) %>
+				</div>
+
+				<div class="chatter-comments-foundation" id="chatter-comments-foundation-<%= @item.id %>"><!--no styling on foundation div since always needs to be there even if no likes -->
+	
+					<% for comment in @item.comments.comments: %>
+				         <%-  JST["templates/chatter/comment"]({comment: comment}) %>					
+					<% end %> <!-- end comment collection -->
+				</div>	
+				<!--only show the comment publisher if there is already a comment on the feed item-->
+				<div class="chatter-comment-publisher-foundation" >					
+					<%-  JST["templates/chatter/comment_publisher"]( {item: @item } ) %>	
+				</div>
+					
+			
+				
+			</div> <!--chatter-feed-item-extras-->
+		
+		</div><!--chatter-feed-item-indented-body-->
+		
+	</div> <!--chatter-feed-item-body-->
+  
+</div><!--chatter-feed-item-wrapper-->
+

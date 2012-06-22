@@ -1,0 +1,53 @@
+  
+  <div id="chatter-comment-publisher-<%= @item.id %>" class="chatter-comment-publisher <%= if @item.comments.total is 0 then  'chatter-hide' %>">
+        
+        <div class="alert alert-error" id="chatter-publisher-error-msgs-<%= @item.id %>"></div>
+
+        <div class="chatter-comment-publisher-form">
+           
+                 <form action="/chatter/feed-items/<%=@item.id%>/comments" id="chatter-comment-publisher-<%= @item.id %>"  class="chatter-comment-publisher" enctype="multipart/form-data" target="submit_target"   method="post" accept-charset="UTF-8" item-id="<%= @item.id %>" >
+                     
+					<div style="margin:0;padding:0;display:inline">
+						<input type="hidden" value="✓" name="utf8">
+						<input type="hidden" value="<%= @item.railsCsrfToken %>" name="authenticity_token">
+					</div>
+
+
+					<div><!-- mentions textarea must have a div as a parent -->
+                     	<textarea name="body" class="mention comment" id="comment-body-<%=@item.id%>" ></textarea>
+					</div>
+					
+                     <textarea name="body-file-hidden" class="hidden" ></textarea>
+					 <input name="feed-item-id" type="text" value="<%= @item.id %>"  class="hidden" />
+					<div class="chatter-comment-file-post-fields" id="chatter-comment-file-post-fields-<%= @item.id %>" >
+	                     <label>Choose File</label>Large files not supported
+						 <input name="file-input" type="file" />
+	                     <label for="Attachment Name">Name</label>
+						 <input name="attachment-name" class="" />                    
+                    </div>
+
+
+                    <div class="alert alert-error" id="chatter-comment-publisher-error-msgs-<%= @item.id %>"></div>
+
+ 			        <div class="chatter-comment-controls">
+						<div class="chatter-open-close-controls">
+ 					    	<a href="javascript: void(0);" class="chatter-show-file-post-fields" id="chatter-show-file-post-fields-<%= @item.id %>" ><img src="/assets/s.gif"> File</a>
+					    	<a href="javascript: void(0);" class="chatter-close-file-post-fields" id="chatter-close-file-post-fields-<%= @item.id %>">Close</a>
+						</div>
+					
+						
+						
+						<div class="chatter-comment-share-button">
+                            <img src='/assets/spinner.gif' class='chatter-api-submit-spinner'  id="chatter-api-submit-spinner-<%= @item.id %>" >      
+							<button type='submit' class="share-button btn">Share</button> 
+						</div>
+        			</div> <!-- end chatter-comment-controls -->
+                 </form>
+
+          </div> <!-- end chatter-comment-publisher-form -->   
+             
+  </div> <!-- end chatter-comment-publisher-div -->  
+ 
+
+
+

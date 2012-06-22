@@ -1,0 +1,12 @@
+<!-- this gets injected into an iframe inside the top level window
+	 so javascript references need to reach up into the top level window -->
+<script>
+	  window.top.window.Chatter.Publisher.reset();
+	  feedItem = window.top.window.jQuery.parseJSON('<%=j raw @feed_item  %>');
+      fi = new window.top.window.Chatter.FeedItem(feedItem, '<%=  current_user.instance_url %>');
+	  fi.railsCsrfToken = '<%=@form_authenticity_token%>'
+	  window.top.window.Chatter.objectHash[fi.id] = fi;
+      fi.addToTop(); 
+      
+
+</script>

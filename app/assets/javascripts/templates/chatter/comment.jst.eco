@@ -1,0 +1,39 @@
+<div class="chatter-comment-container" id="chatter-comment-container-<%=@comment.id%>" >
+							
+	 <span><a class="chatter-user-profile-picture" href="<%= @comment.instanceUrl %>/<%= @comment.user.id %>"><img class="chatter-user-profile-picture" src="<%= Chatter.Util.authenticatedImageUrl(@comment.user.photo.smallPhotoUrl) %>" width="32" height="32" ></a>
+	</span>
+
+	<div class="chatter-comment-body">
+		<div class="chatter-comment-indented-body" object-id="<%= @comment.id %>" id="chatter-comment-indented-body-<%= @comment.id %>" >
+			<div class="chatter-wrapped-body comment" object-id="<%= @comment.id %>">
+				<a href="<%= @comment.instanceUrl %>/<%= @comment.user.id %>"><%= @comment.user.name %></a>
+				<%- @comment.segmentsToHtml() %>
+				
+				<div class="chatter-comment-aux-body">
+				<%- @comment.attachment?.render(@comment.instanceUrl) %>			
+		    	</div>	
+		
+				<div class="chatter-comment-actions">
+
+					<a class="chatter-feed-component-date" href="<%= @comment.instanceUrl %>/<%= @comment.id %>"><%- @comment.displayDate %></a>&nbsp;										
+			
+					<%- @comment.renderLikeOrUnlikeLink('comment') %>
+
+	                <span class="chatter-feedcomponent-hover-controls">
+						<i class="icon-remove chatter-comment-delete" object-id="<%= @comment.id %>" ></i>
+					</span>
+				</div>
+			</div><!-- end chatter-wrapped-body-->
+			
+		   
+			
+			<div class="chatter-comment-extras">
+				<div id="chatter-users-that-liked-foundation-<%= @comment.id %>"><!--no styling on foundation div since always needs to be there even if no likes -->
+				  <%- Chatter.Like.renderLikesContainer(@comment.id, @comment.likes, @comment.likesTotal, @comment.isLikedByCurrentUser, @comment.instanceUrl) %>
+				</div>
+			</div>
+									
+									
+		</div><!--end chatter-comment-indented-body-->
+	</div><!--end chatter-comment-body-->
+</div> <!--end chatter-comment-container-->

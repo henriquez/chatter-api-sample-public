@@ -1,0 +1,66 @@
+  
+  <div id="feed-post-div" class="well">
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li id='tab-feed-text-post' class='active'><a href="#feed-text-post" data-toggle="tab" >Post</a></li>
+            <li id='tab-feed-file-post'><a href="#feed-file-post" data-toggle="tab" >File</a></li>
+            <li id='tab-feed-link-post'><a href="#feed-link-post" data-toggle="tab" >Link</a></li>
+        </ul>
+        
+        <div class="alert alert-error" id="chatter-feeditem-publisher-error-msgs"></div>
+
+        <div class="tab-content">
+             <div id="feed-file-post" class="tab-pane">
+                 <%= form_tag '/chatter/feeds', :id => "chatter-publisher-file-form",  :class => "feeditem",  :multipart => true, :target => 'submit_target' do %>
+                     <div id="mention-text-area-wrapper-file-form" ><!-- mentions textarea must have a div as a parent -->
+                     	<%= text_area_tag "feed-item-body-file", nil, :class => "mention feeditem-text-area" %>
+					</div>
+                     <%= text_area_tag "feed-item-body", nil, { :id =>   'feed-item-body-hidden-file', :class => "hidden" } %>
+                     <label>Choose File</label>Large files not supported
+					 <%= file_field_tag "feed-item-file-input" %>
+                     <label for="Attachment Name">Name</label>
+					 <%= text_field_tag "attachment-name", nil,  :class => "" %>                    
+                     <label for="Attachment Description">Description</label>
+					 <%= text_area_tag "attachment-desc", nil %>
+                      
+                     <br/><button type='submit' id="file-post-btn" class="feed-post-share-button btn">Share</button>  <%= image_tag 'spinner.gif', :class=> 'chatter-api-submit-spinner chatter-feeditem-publisher' %>        
+                 <% end %>
+             </div>
+             
+
+             <div id="feed-text-post" class="tab-pane active">
+                   <%= form_tag '/chatter/feeds', :class => "feeditem", :id => "chatter-publisher-text-form", :target => 'submit_target' do %>
+                     <div id="mention-text-area-wrapper-text-form" ><!-- mentions textarea must have a div as a parent for mentions CSS to work -->
+                     <%= text_area_tag "feed-item-body-text", nil, :class => "mention feeditem-text-area"  %>
+					 </div>
+                     <%= text_area_tag "feed-item-body", nil, { :id =>   'feed-item-body-hidden-text', :class => "hidden" } %>  
+                     <button class="feed-post-share-button btn" type='submit'>Share</button> <%= image_tag 'spinner.gif', :class=> 'chatter-api-submit-spinner chatter-feeditem-publisher' %> 
+                         
+                   <% end %>
+             </div>  
+             
+
+             <div id="feed-link-post" class="tab-pane">
+                   <%= form_tag '/chatter/feeds', :class => "feeditem", :id => "chatter-publisher-link-form", :target => 'submit_target' do %>
+                   	  <div id="mention-text-area-wrapper-link-form" ><!-- mentions textarea must have a div as a parent -->
+	                     <%= text_area_tag "feed-item-body-link", nil,  :class => "mention feeditem-text_area"  %>
+					  </div>
+	                     <%= text_area_tag "feed-item-body", nil, { :id =>   'feed-item-body-hidden-link', :class => "hidden" } %>
+	                     <label>URL</label>
+						 <%= url_field_tag "link-url", nil, :class => "name-hidden"  %>	                      
+	                     <label>Name</label>
+						 <%= text_field_tag "link-name" , nil, :class => "name-hidden" %>
+                 
+	                     <br/><button type='submit' class="feed-post-share-button btn">Share</button> <%= image_tag 'spinner.gif', :class=> 'chatter-api-submit-spinner chatter-feeditem-publisher' %>    
+	        			<iframe id="submit_target" name="submit_target" src="#" style="width:0;height:0;border:0px;"></iframe>
+                 </form>
+                   <% end %>
+             </div>
+
+          </div> <!-- end tab-content -->   
+      </div> <!-- end tabbable -->          
+  </div> <!-- end feed-post-div -->  
+ 
+
+
+

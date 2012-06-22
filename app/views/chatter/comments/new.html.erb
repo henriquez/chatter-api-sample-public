@@ -1,0 +1,11 @@
+<!-- this gets injected into an iframe inside the top level window
+	 so javascript references need to reach up into the top level window -->
+<script>	  
+	  api_comment = window.top.window.jQuery.parseJSON('<%=j raw @comment  %>');
+
+      comment = new window.top.window.Chatter.Comment(api_comment, '<%=  current_user.instance_url %>');
+      window.top.window.Chatter.CommentPublisher.reset(comment.feedItemId);
+      window.top.window.Chatter.objectHash[comment.id] = comment;
+      comment.addToList(); 
+
+</script>

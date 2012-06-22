@@ -1,0 +1,4 @@
+<script>
+  window.top.window.jQuery("div#chatter-comment-publisher-error-msgs-<%=@feed_item_id%>", window.top.document).text('<%=j raw @error  %>').show();
+  window.top.window.Chatter.CommentPublisher.hideSpinner("<%=@feed_item_id%>");
+</script>
