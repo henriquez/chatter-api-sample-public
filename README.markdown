@@ -3,7 +3,9 @@ Welcome to the Chatter REST API Sample Application
 
 The Salesforce Chatter API sample application is an open source MIT licensed application that illustrates how to use the Chatter REST API to build Chatter UI.  Use cases include integrating a Chatter feed into a 3rd party application or building custom / branded Chatter UI.  [Try it out here](http://chatter-api-sample.herokuapp.com).
 
-Most of the application is written in [CoffeeScript](http://coffeescript.org) for readability and portability. CoffeeScript compiles into fast and readable Javascript that runs in the browser. See the [chatter.js file](https://github.com/henriquez/chatter-api-sample-public/blob/master/doc/chatter.js) if you prefer to read Javascript.
+Most of the application is written in [CoffeeScript](http://coffeescript.org) for readability and portability. CoffeeScript compiles into fast and readable Javascript that runs in the browser. The primary application file is [chatter.js.coffee](https://github.com/henriquez/chatter-api-sample-public/blob/master/app/assets/javascripts/chatter.js.coffee).  See the [chatter.js file](https://github.com/henriquez/chatter-api-sample-public/blob/master/doc/chatter.js) if you prefer to read Javascript.
+
+Due to Single Origin Policy, all API requests are proxied through the server.  See app/controllers and app/models for how this works.
 
 MIT Open Source License
 =======================
