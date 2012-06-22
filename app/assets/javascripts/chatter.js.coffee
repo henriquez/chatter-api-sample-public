@@ -1,10 +1,8 @@
 ###############################################################
 # Chatter related code
-#  - mentions picker
-#  - file, link, text post tabs
 ###############################################################
 
-# single global namespace for all Chatter related functions shared between components
+# single global namespace for all Chatter related functions 
 window.Chatter = { }
 window.Chatter.objectHash = {} # hash of Chatter.FeedItems with their ids as the keys
 window.Chatter.nextPageUrl = "" # remember paging token used in "more" button
@@ -87,7 +85,7 @@ class Chatter.FeedPage
 
 
 ################################################
-# USER (encapsulates both user summary and user detail)
+# PHOTO 
 ################################################
 class Chatter.Photo
   
@@ -111,7 +109,7 @@ class Chatter.User
   
 
 ################################################
-# USER (encapsulates both user summary and user detail)
+# GROUP 
 ################################################
 class Chatter.Group
   
@@ -126,7 +124,7 @@ class Chatter.Group
       
     
 ################################################
-# UNAUTHENTICATED USER (encapsulates both user summary and user detail)
+# UNAUTHENTICATED USER 
 ################################################
 class Chatter.UnAuthenticatedUser
   
@@ -150,7 +148,7 @@ class Chatter.Record
     
 
 ################################################
-# File 
+# File AKA ContentDocument
 ################################################
 class Chatter.File
   
