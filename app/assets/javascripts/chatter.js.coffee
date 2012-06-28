@@ -319,7 +319,7 @@ class Chatter.FeedComponent
   # return an attachment instance appropriate to the feedItemType
   @createAttachment: (type, attachmentData, instanceUrl) ->
     switch type
-      when "ContentPost", "ContentComment"
+      when "ContentPost", "ContentComment" 
         return new Chatter.ContentPostAttachment(attachmentData, instanceUrl)
       when "LinkPost"
         return new Chatter.LinkPostAttachment(attachmentData, instanceUrl)
@@ -527,13 +527,17 @@ class Chatter.ContentPostAttachment
   # This class is used for content attachments on both feed items and comments
      
   constructor: (data) ->
-    @description = if data.description isnt null then Chatter.Util.htmlEscape(data.description) else ""
-    @downloadUrl = data.downloadUrl
-    @hasImagePreview = data.hasImagePreview
-    @id = data.id
-    @title = Chatter.Util.htmlEscape(data.title)
-    @versionId = data.versionId
-    
+    if data isnt null
+      @description = if data.description isnt null then Chatter.Util.htmlEscape(data.description) else ""
+      @downloadUrl = data.downloadUrl
+      @hasImagePreview = data.hasImagePreview
+      @id = data.id
+      @title = Chatter.Util.htmlEscape(data.title)
+      @versionId = data.versionId
+    else     # file attachments may be null, for example if the file associated with a post
+      @description = 'The file was deleted'       # was deleted after the post.
+      
+
 
   render: (instanceUrl) ->
     # images may not have an image preview if they were just uploaded, so
@@ -543,26 +547,38 @@ class Chatter.ContentPostAttachment
         Chatter.Util.authenticatedImageUrl("#{instanceUrl}/#{Chatter.Util.apiUrlPreamble()}/chatter/files/#{@id}/rendition")
       else
         "/assets/generic_file_image.jpeg"
-    return """
-           <div class="chatter-aux-body-inner">
-             <a href="#{instanceUrl}/#{@versionId}" >  
-                <img src="#{renditionUrl}" class="chatter-content-post-rendition" width="40" height="30" />
-             </a>     
-             <div class="chatter-content-post-title-description">
-                <a href="#{instanceUrl}/#{@versionId}" class="break-link">#{@title}</a>
-                <div class="chatter-content-post-actions hidden"><!--TODO: hidden until server implements faster download-->  
-                  <a href="/chatter/file/#{@versionId}"><i class="icon-download-alt" ></i>
-                    Download</a>
-                </div>
-                <div class="chatter-wrapped-description">
-                   #{@description}
-                </div>   
-             </div>
-            
-           </div>
+    html = ''
+    # file attachments may be null, for example if the file was deleted    
+    if @versionId?
+      html += """
+             <div class="chatter-aux-body-inner">
+               <a href="#{instanceUrl}/#{@versionId}" >  
+                  <img src="#{renditionUrl}" class="chatter-content-post-rendition" width="40" height="30" />
+               </a>     
+               <div class="chatter-content-post-title-description">
+                  <a href="#{instanceUrl}/#{@versionId}" class="break-link">#{@title}</a>
+                  <div class="chatter-content-post-actions hidden"><!--TODO: hidden until server implements faster download-->  
+                    <a href="/chatter/file/#{@versionId}"><i class="icon-download-alt" ></i>
+                      Download</a>
+                  </div>
+
+             """
+    else
+      html += """
+                 <div class="chatter-aux-body-inner"> 
+                   <img src="#{renditionUrl}" class="chatter-content-post-rendition" width="40" height="30" />    
+                   <div class="chatter-content-post-title-description">
+              """
+    # always return the description so user knows if file was deleted
+    html += """     <div class="chatter-wrapped-description">
+                       #{@description}
+                    </div>   
+                 </div>
+        
+               </div>
            """
-    
-    
+    return html
+
 
 ################################################
 # LinkPostAttachment
