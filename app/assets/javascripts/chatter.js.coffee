@@ -43,33 +43,34 @@ class Chatter.FeedPage
   constructor: (feedType, pageParam) ->   
     params = "pageSize=#{Chatter.FeedPage.pageSize}"
     params += if pageParam? then "&page=#{pageParam}" else ""
-    $.getJSON("/chatter/feeds/#{feedType}?#{params}", (@apiFeedPage) =>  # apiFeedPage is already parsed into Object   
-      if @apiFeedPage.error?
-        $("div#chatter-feed-display").append "<div class=\"alert alert-error\">#{@apiFeedPage.error}</div>"
-      else  
-        items = (for item in @apiFeedPage.items
-                  fi = new Chatter.FeedItem(item, @apiFeedPage.instance_url)
-                  # JST appears to be unable to access data stored in the dom,
-                  # so add in any data needed when rendering -in this case protect
-                  # comment forms from CSRF attacks.
-                  fi.railsCsrfToken = @apiFeedPage.rails_csrf_token
-                  window.Chatter.objectHash[fi.id] = fi  #save for later usage
-                  fi )       
-        @feedPage = { items: items, nextPageUrl: @apiFeedPage.nextPageUrl }        
-        Chatter.FeedPage.render(@feedPage)
-        window.Chatter.nextPageUrl = @apiFeedPage.nextPageUrl # save for "more" button
-        # show the next page button only if there is a next page
-        page_param = Chatter.Util.getParameterByName('page', @feedPage.nextPageUrl)
-        if page_param == null  # there is no next page
-          $('button#next-feed-page').remove()
-        # do initialization that requires the feed to be in the DOM
-        # show the file attachment fields when the user clicks "file"
-        Chatter.CommentPublisher.attachAllEvents()
-        # chatter feed post initialization so textarea recognizes mentions
-        Chatter.FeedComponent.attachMentionEvents('textarea.mention')      
-    ).error((xhr, textStatus) => Chatter.Error.xhr(xhr.status, textStatus) )
+    $.getJSON("/chatter/feeds/#{feedType}?#{params}", Chatter.FeedPage.model )
+      .error((xhr, textStatus) => Chatter.Error.xhr(xhr.status, textStatus) )
       
     
+  @model: (apiFeedPage) =>  # apiFeedPage is already parsed into Object   
+    if apiFeedPage.error?
+      $("div#chatter-feed-display").append "<div class=\"alert alert-error\">#{@apiFeedPage.error}</div>"
+    else  
+      items = (for item in apiFeedPage.items
+                fi = new Chatter.FeedItem(item, apiFeedPage.instance_url)
+                # JST appears to be unable to access data stored in the dom,
+                # so add in any data needed when rendering -in this case protect
+                # comment forms from CSRF attacks.
+                fi.railsCsrfToken = apiFeedPage.rails_csrf_token
+                window.Chatter.objectHash[fi.id] = fi  #save for later usage
+                fi )       
+      feedPage = { items: items, nextPageUrl: apiFeedPage.nextPageUrl }        
+      Chatter.FeedPage.render(feedPage)
+      window.Chatter.nextPageUrl = apiFeedPage.nextPageUrl # save for "more" button
+      # show the next page button only if there is a next page
+      page_param = Chatter.Util.getParameterByName('page', feedPage.nextPageUrl)
+      if page_param == null  # there is no next page
+        $('button#next-feed-page').remove()
+      # do initialization that requires the feed to be in the DOM
+      # show the file attachment fields when the user clicks "file"
+      Chatter.CommentPublisher.attachAllEvents()
+      # chatter feed post initialization so textarea recognizes mentions
+      Chatter.FeedComponent.attachMentionEvents('textarea.mention')      
   
   
   # get and render the 1st page of feed items  
