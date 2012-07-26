@@ -11,7 +11,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider OmniAuth::Strategies::GUS, ENV['GUS_CLIENT_ID'], ENV['GUS_CLIENT_SECRET']
   # login.salesforce.com
   provider :salesforce, ENV['DATABASEDOTCOM_CLIENT_ID'], ENV['DATABASEDOTCOM_CLIENT_SECRET']
-  # TODO: the blitz01 credentials need to be created/configured
+  # 180 testing - note that the callback url must be https://localhost/auth/blitz01/callback in the RA app
+  # since the part after "auth" is taken from the strategy subclass name.
   provider OmniAuth::Strategies::Blitz01, ENV['BLITZ01_CLIENT_ID'], ENV['BLITZ01_CLIENT_SECRET']
 end
 
