@@ -15,3 +15,19 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Installation
+============
+
+The repo omits a few files for security reasons:
+
+* database.yml
+* a sqlite db
+
+You'll have to create these.  See the Rails guides for details.
+
+In addition, there are a several settings that require environment variables to be created.  In config/initializers/secret_token.rb you'll need to configure your site key.  In config/omniauth.rb you'll see the variables required for your OAuth configuration.  Unless you are inside the salesforce firewall and want to access blitz or GUS, the salesforce provider is the only setting you need and you can delete the others.
+
+As with any Rails installation, you'll have to run "bundle install" to pull in all the dependencies.  See the Rails Guides if you're not familiar with rails setup.
+
+For OAuth to work, your installation must support SSL. There are several ways to do this depending on what type of web server you have. 
